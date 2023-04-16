@@ -19,4 +19,6 @@ Route::get('/',[IndexController::class,'index']);
 Route::get('/show',[IndexController::class,'show']);
 
 
-Route::resource('listing',ListingController::class)->only(['index','show','create','store']);
+// Route::resource('listing',ListingController::class)->only(['index','show','create','store']);
+// Route::resource('listing',ListingController::class)->except(['destroy']);
+ Route::resource('listing',ListingController::class);

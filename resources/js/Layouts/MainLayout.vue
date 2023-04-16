@@ -1,18 +1,17 @@
 <template>
-  <Link href="/">Main Page</Link>&nbsp;
-  <Link href="/show">Show Page</Link>
-  <div>The page with time {{ timer }}</div>
-
-  <slot />
+    <Link href="/listing">Listings</Link>&nbsp;
+    <Link href="/listing/create">New Listing</Link>
+  
+    <slot />
 </template>
 
 <script setup>
-import { Link } from '@inertiajs/vue3'
-import { ref } from 'vue'
-const timer = ref(1)
-
-setInterval(() => {
-  timer.value++
-}, 1000)
+import { Link, usePage } from "@inertiajs/vue3";
 </script>
 
+<style scoped>
+.success {
+    background-color: green;
+    color: white;
+}
+</style>

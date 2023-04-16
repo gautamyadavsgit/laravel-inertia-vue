@@ -1,9 +1,9 @@
 <template>
-    <form @submit.prevent="create">
+    <form @submit.prevent="update">
         <div>
             <div>
                 <label>Beds</label>
-                <input v-model.number="form.beds" type="number" max="20"/>
+                <input v-model.number="form.beds" type="number" max="20" />
                 <div v-if="form.errors.beds" style="color: red">
                     {{ form.errors.beds }}
                 </div>
@@ -12,14 +12,15 @@
             <div>
                 <label>Baths</label>
                 <input v-model.number="form.baths" type="number" max="20" />
-            
+
                 <div v-if="form.errors.baths" style="color: red">
                     {{ form.errors.baths }}
-                </div></div>
+                </div>
+            </div>
 
             <div>
                 <label>Area</label>
-                <input v-model.number="form.area" type="number" min="15"  />
+                <input v-model.number="form.area" type="number" min="15" />
                 <div v-if="form.errors.area" style="color: red">
                     {{ form.errors.area }}
                 </div>
@@ -74,17 +75,21 @@
 
 <script setup>
 import { useForm } from "@inertiajs/vue3";
-const form = useForm({
-    beds: 0,
-    baths: 0,
-    area: 0,
-    city: null,
-    street: null,
-    code: null,
-    street_nr: null,
-    price: 0,
+
+const props = defineProps({
+    listing: Object,
 });
-const create = () => form.post("/listing");
+const form = useForm({
+    beds: props.listing.beds,
+    baths: props.listing.baths,
+    area: props.listing.area,
+    city: props.listing.city,
+    street: props.listing.street,
+    code: props.listing.code,
+    street_nr: props.listing.street_nr,
+    price: props.listing.price,
+});
+const update = () => form.put(`/listing/${props.listing.id}`);
 </script>
 
 <style scoped>
